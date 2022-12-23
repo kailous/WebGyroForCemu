@@ -21,19 +21,19 @@ async function main() {
     })
   }
 
-  console.log('Download Cert ...')
+  console.log('下载证书 ...')
   var credentials = await Promise.all([
       download('https://xip.lhjmmc.cn/key.pem'),
       download('https://xip.lhjmmc.cn/fullchain.pem')
     ])
     .then(([privateKey, certificate]) => {
-      console.log('Download Successed')
+      console.log('下载成功')
       return {
         key: privateKey,
         cert: certificate
       }
     }, err => {
-      console.error('Download error')
+      console.error('下载失败')
       return {
         key: fs.readFileSync(__dirname + '/ssl/key.pem', 'utf8'),
         cert: fs.readFileSync(__dirname + '/ssl/cert.pem', 'utf8')
@@ -56,7 +56,7 @@ async function main() {
     DSUS_PadDataRsp: 0x100002
   };
   const serverID = 0 + Math.floor(Math.random() * 4294967295);
-  console.log(`serverID: ${serverID}`);
+  console.log(`服务器ID（serverID）: ${serverID}`);
 
   var connectedClient = null;
   var lastRequestAt = 0;
@@ -106,11 +106,11 @@ async function main() {
       client.address,
       (error, bytes) => {
         if (error) {
-          console.log("Send packet error");
+          console.log("发送数据包错误");
           console.log(error.message);
         } else if (bytes !== buffer.length) {
           console.log(
-            `failed to completely send all of buffer. Sent: ${bytes}. Buffer length: ${buffer.length}`
+            `未能完全发送所有缓冲区。 发送: ${bytes}. 缓冲区长度: ${buffer.length}`
           );
         }
       }
@@ -127,7 +127,7 @@ async function main() {
   server.on("listening", () => {
     const address = server.address();
     console.log(
-      `UDP Pad motion data provider listening ${address.address}:${address.port}`
+      `UDP Pad 运动数据提供者侦听 ${address.address}:${address.port}`
     );
   });
 
@@ -163,7 +163,7 @@ async function main() {
     index += 4;
 
     if (msgType == MessageType.DSUC_VersionReq) {
-      console.log("Version request ignored.");
+      console.log("忽略版本请求.");
     } else if (msgType == MessageType.DSUC_ListPorts) {
       // console.log("List ports request.");
       let numOfPadRequests = data.readInt32LE(index);
@@ -311,11 +311,11 @@ async function main() {
       client.address,
       (error, bytes) => {
         if (error) {
-          console.log("Send packet error");
+          console.log("发送数据包错误");
           console.log(error.message);
         } else if (bytes !== outBuffer.length) {
           console.log(
-            `failed to completely send all of buffer. Sent: ${bytes}. Buffer length: ${outBuffer.length}`
+            `未能完全发送所有缓冲区。 发送: ${bytes}. 缓冲区长度: ${outBuffer.length}`
           );
         }
       }
@@ -339,7 +339,7 @@ async function main() {
       readStream.pipe(response);
     })
   httpsServer.listen(8443, function() {
-    console.log('https server started')
+    console.log('https 服务器已启动')
   });
 
   var httpServer = http.createServer(
@@ -358,15 +358,14 @@ async function main() {
 
   httpServer.listen(8080, function() {
     console.log(`
-    ----------------------------------------
-              Version 1.9 by hjmmc
+    -----------------------------------------
+          版本 1.9 by hjmmc 汉化：kailous
     -----------------------------------------
 
-##Usage
+##用法
 
-1.Run Cemu.exe and Checked Options->GamePad mation source->DSU1->By Slot
-
-2.Use your phone‘s browser (safair or chrome) open the following url`);
+1. 运行 cemu.app 并打开 选项 -> 输入设置 -> 链接手柄或键盘后点击 "+" 号 -> API 选择 DSU开头的选项 -> 等待搜索控制器并链接
+2. 使用手机浏览器（safari 或 chrome）打开以下网址`);
     var interfaces = require("os").networkInterfaces();
     for (var k in interfaces) {
       for (var i in interfaces[k]) {
@@ -379,7 +378,7 @@ async function main() {
       }
     }
     console.log(`
-3.Note: If you are using ios 12.2+, please enable 'Settings > Safari > Motion and Orientation access' and use HTTPS to access`)
+3. 注意：如果您使用的是 ios 12.2+，请启用“设置 > Safari > 运动和方向访问”并使用 HTTPS 访问`)
     var interfaces = require("os").networkInterfaces();
     for (var k in interfaces) {
       for (var i in interfaces[k]) {
@@ -399,7 +398,7 @@ async function main() {
   function createWss(server) {
     var wss = require('socket.io')(server);
     wss.on("connection", function connection(ws) {
-      console.log("WS Connected");
+      console.log("WS 已链接");
       phoneIsConnected = true;
       ws.on("report", function(msg) {
         var data = JSON.parse(msg)
@@ -415,7 +414,7 @@ async function main() {
       // });
       ws.on("disconnect", () => {
         phoneIsConnected = false;
-        console.log("WS Disconnected");
+        console.log("WS 断开连接");
       });
     });
   }
