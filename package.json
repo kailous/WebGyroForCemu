@@ -1,6 +1,6 @@
 {
-  "name": "web-gyro-for-cemu",
-  "version": "1.0.0",
+  "name": "WebGyroForCemu",
+  "version": "1.9.0",
   "description": "Use web ondevicemotion event data provided to cemu",
   "bin": "app.js",
   "scripts": {

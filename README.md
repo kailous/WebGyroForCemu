@@ -32,3 +32,24 @@
 > [pkg](https://github.com/zeit/pkg)
 
 > [xip.lhjmmc.cn](https://xip.lhjmmc.cn) https cert to slove latency problem. ~~Since safari's websocket does not support self-signed certificates, when using HTTPS access, socket.io will probably use XHR instead of websocket, which will increase communication latency.~~
+
+## 设置说明
+将此存储库克隆到计算机中的任何位置（由于 UAC 原因，避免使用程序文件）。
+
+cd address 导航到包含使用命令提示符 ( app.js ) 的文件夹。  
+
+使用以下命令下载所需的节点包（忽略警告）：
+```sh
+npm install
+```
+最后，使用以下命令运行服务器：
+```sh
+npm start
+```
+app.js 文件实现了三个服务器：
+
+与 cemuhook 通信的 UDP 服务器（此服务器侦听端口26760)
+与电话通信的 WebSocket 服务器（此服务器侦听端口1337)
+为电话访问的网页提供服务的 HTTP 服务（此服务器侦听端口8080)
+您可以通过将 app.js 文件中的值 （CTRL+F） 替换为所需的值来更改所需的任何端口。如果更改 WebSocket 服务器端口，还必须在文件中替换它。static.html
+
