@@ -1,7 +1,7 @@
 {
-  "name": "WebGyroForCemu",
+  "name": "webgyroforcemu",
   "version": "1.9.0",
-  "description": "Use web ondevicemotion event data provided to cemu",
+  "description": "Use web ondevicemotion event data provided to cemuhook",
   "bin": "app.js",
   "scripts": {
     "start": "node app.js"
