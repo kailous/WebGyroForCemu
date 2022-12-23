@@ -93,7 +93,7 @@ async function main() {
   }
 
   function SendPacket(client, data) {
-    let buffer = new Buffer(16);
+    let buffer = new Buffer.alloc(16);
     let index = BeginPacket(buffer, data.length);
     // buffer.fill(data,index);
     buffer = Buffer.concat([buffer, data]);
@@ -171,7 +171,7 @@ async function main() {
       for (let i = 0; i < numOfPadRequests; i++) {
         let requestIndex = data[index + i];
         if (requestIndex !== 0) continue;
-        let outBuffer = new Buffer(16);
+        let outBuffer = new Buffer.alloc(16);
         outBuffer.writeUInt32LE(MessageType.DSUS_PortInfo, 0, true);
         let outIndex = 4;
         outBuffer[outIndex++] = 0x00; // pad id
@@ -219,7 +219,7 @@ async function main() {
     if (client === null || Date.now() - lastRequestAt > clientTimeoutLimit)
       return;
 
-    let outBuffer = new Buffer(100);
+    let outBuffer = new Buffer.alloc(100);
     let outIndex = BeginPacket(outBuffer);
     outBuffer.writeUInt32LE(MessageType.DSUS_PadDataRsp, outIndex, true);
     outIndex += 4;
